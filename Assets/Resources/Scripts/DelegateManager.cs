@@ -23,9 +23,9 @@ public class DelegateManager
     }
 
 
-    public void AddDelegateTimer(MyDelegate toInvoke, float time )
+    public void AddDelegateTimer(MyDelegate toInvoke, float time , int sameFunctionCallCount )
     {
-        DelegateTimer toAdd = new DelegateTimer(toInvoke,Time.time+ time);
+        DelegateTimer toAdd = new DelegateTimer(toInvoke,Time.time+ time,sameFunctionCallCount);
         delegateTimers.Add(toAdd);
     }
     
@@ -38,7 +38,28 @@ public class DelegateManager
 
             if (delegateTimers[i].timeOfInvoke <= Time.time)
             {
-                delegateTimers[i].delegateToInvoke.Invoke();
+
+                for (int j = 0; j < delegateTimers[i].invokeCount; j++)
+                {
+
+                    try
+                    {
+                        delegateTimers[i].delegateToInvoke.Invoke();
+                    }
+                    catch (System.Exception)
+                    {
+
+                        Debug.LogError("Problem while invoking");
+                    }
+
+                    
+                    
+
+
+
+
+                }
+
                 delegateTimers.RemoveAt(i);
 
             }
@@ -46,6 +67,35 @@ public class DelegateManager
         }
 
     }
+
+   
+
+   
+
+    
+  
+
+
+
+
+
+
+    /* public void InvokeCallCount(int x)
+
+     {
+         for (int i = 0; i < x; i++)
+         {
+
+             if (delegateTimers[])
+             {
+
+             }
+
+
+         }
+
+
+     }*/
 
     public void EndGame() 
     {
@@ -56,11 +106,13 @@ public class DelegateManager
     {
         public float timeOfInvoke;
         public MyDelegate delegateToInvoke;
+        public int invokeCount;
 
-        public DelegateTimer( MyDelegate delegateToInvoke, float timeofInvokee)
+        public DelegateTimer( MyDelegate delegateToInvoke, float timeofInvokee , int invokeCount)
         {
             this.timeOfInvoke = timeofInvokee;
             this.delegateToInvoke = delegateToInvoke;
+            this.invokeCount = invokeCount;
         }
 
 

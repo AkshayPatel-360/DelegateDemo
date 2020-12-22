@@ -13,11 +13,19 @@ public class MainScript : MonoBehaviour
         DelegateManager.Instance.Initialize();
 
         string s = desiredOutput;
-        DelegateManager.Instance.AddDelegateTimer(() => {OutputMessage(s); },1.5f);
+        DelegateManager.Instance.AddDelegateTimer(() => {OutputMessage(s); },1.5f,2);
         desiredOutput = "Akki changed";
 
-        DelegateManager.Instance.AddDelegateTimer(() => { OutputMessage(desiredOutput); }, 3f); 
-       // DelegateManager.Instance.AddDelegateTimer(MyFunction, 10f);
+        DelegateManager.Instance.AddDelegateTimer(() => { OutputMessage(desiredOutput); }, 3f,3);
+
+      
+
+         
+
+        
+
+
+        // DelegateManager.Instance.AddDelegateTimer(MyFunction, 10f);
     }
 
     // Update is called once per frame
@@ -25,7 +33,15 @@ public class MainScript : MonoBehaviour
     {
         DelegateManager.Instance.Refresh();
 
+       
+
     }
+
+
+
+  
+    
+
 
 
     public void MyFunction()
