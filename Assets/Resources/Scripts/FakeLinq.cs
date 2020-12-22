@@ -42,6 +42,12 @@ public static class FakeLinq
     }
 
 
+    public static void CallAfter(this DelegateManager.MyDelegate myDelegate, float timer)
+    {
+        DelegateManager.Instance.AddDelegateTimer(myDelegate, timer,0);
+    }
+
+
 
 
 
